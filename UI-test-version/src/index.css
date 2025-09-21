@@ -3,6 +3,7 @@ body,
 #root {
   height: 100%;
   margin: 0;
+  background-color: #333533;
 }
 
 .grid-container {
@@ -19,7 +20,6 @@ body,
 .sidebar {
   grid-area: sidebar;
   color: white;
-  background: lightblue;
   width: 60px;
   height: 44px;
   transition: width 0.3s ease;
@@ -28,13 +28,16 @@ body,
   align-items: center;
   padding: 8px;
   transition: linear 0.5s;
+
 }
 
 .sidebar.expanded {
   width: 200px;
   align-items: flex-start;
   height: 100%;
-  background: #333;
+  background: #95D5B2;
+  border: 5px solid #2b2d2b;
+  border-radius: 10px;
 }
 
 .menu-btn {
@@ -64,7 +67,8 @@ body,
 
 .header {
   grid-area: header;
-  background: lightblue;
+  background: #333533;
+  color: #FFF8E7;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -79,15 +83,14 @@ body,
 
 .main {
   grid-area: main;
-  background: white;
   padding: 1rem;
   display: grid;
   place-items: center;
+  background-color: #333533;
 }
 
 .footer {
   grid-area: footer;
-  background: lightblue;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -98,27 +101,56 @@ body,
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 10px;
   padding: 10px;
-  background-color: #333;
+  background-color: #95D5B2;
   width: 600px;
   height: 200px;
-  border-radius: 10px;
+  border-radius: 25px;
 }
 
 textarea {
   border: 0px;
   border-radius: 30px;
-  padding: 20px;
+  padding: 15px;
   width: 400px;
-  height: 40px;
+  height: 30px;
   font-family: "IBM Plex Sans", sans-serif;
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
   font-variation-settings: "wdth" 80;
-  font-size: 20px;
+  font-size: 25px;
   min-height: 40px;
-  max-height: 200px;
+  max-height: 150px;
   overflow-y: auto;
   min-width: 400px;
+  background-color: #FFF8E7;
+}
+
+.send-button{
+  background-color: #FFF8E7;
+  border: 5px solid #FFF8E7; 
+  border-radius: 10px;
+  cursor: pointer;
+  transition: linear 0.1s;
+}
+
+.send-button:hover{
+  transform: scale(1.05);
+  border: 5px solid #e6dfcf;
+}
+
+.SendSymbol{
+width: 30px;
+}
+
+.chatList{
+  padding: 10px;
+}
+
+.sideBarChatName {
+  border: 2px solid #8dc8a8;
+  border-radius: 5px;
+  padding: 5px
 }

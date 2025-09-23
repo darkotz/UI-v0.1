@@ -1,14 +1,27 @@
+import React, { useState, useRef, useEffect } from "react";
 import "./index.css";
-import { useState } from "react";
-import SendSymbol from "../public/direct.png"
+import { gsap } from "gsap";
+import { themes } from "./themes";
+import SeasonalSwitcher from "./SeasonalSwitcher";
 
 function App() {
   const [open, setOpen] = useState(false);
+  const [theme, setTheme] = useState("autumn");
+  const appRef = useRef(null);
+
+  useEffect(() => {
+    const current = themes[theme];
+    gsap.to(appRef.current, {
+      backgroundColor: current.background,
+      color: current.text,
+      duration: 1.2,
+      ease: "power2.inOut",
+    });
+  }, [theme]);
 
   return (
     <>
-      {" "}
-      <div className="grid-container">
+      <div ref={appRef} className="grid-container">
         <aside className={`sidebar ${open ? "expanded" : ""}`}>
           <button className="menu-btn" onClick={() => setOpen(!open)}>
             ☰
@@ -23,16 +36,15 @@ function App() {
             </nav>
           )}
         </aside>
-        <header className="header">Header</header>
+        <header className="header">
+          <SeasonalSwitcher onThemeChange={setTheme} />
+        </header>
         <main className="main">
           <div className="input-box">
             <textarea placeholder="Ask anything..." type="text" />
-            <button className="send-button">
-              <img src={SendSymbol} alt="" className="SendSymbol" />
-            </button>
           </div>
         </main>
-        <footer className="footer">123</footer>
+        <footer className="footer"></footer>
       </div>
     </>
   );

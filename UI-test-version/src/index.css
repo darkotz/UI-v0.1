@@ -35,6 +35,7 @@ body,
   height: 100%;
   border: 5px solid #2b2d2b;
   border-radius: 10px;
+  margin-right: 10px;
 }
 
 .menu-btn {
@@ -64,13 +65,14 @@ body,
 .header {
   grid-area: header;
   color: #fff8e7;
-  padding: 10px;
   font-family: "IBM Plex Sans", sans-serif;
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
   font-variation-settings: "wdth" 80;
   font-size: 50px;
+  display: flex;
+  align-items: center;
 }
 
 .main {
@@ -127,4 +129,38 @@ textarea {
   border: 2px solid #8dc8a8;
   border-radius: 5px;
   padding: 5px;
+}
+
+.seasonalSwithConteinter{
+  display: flex;
+  align-items: center;
+  
+}
+
+.tabs{
+  margin: 10px;
+  border-radius: 20px;
+  border: 0px;
+  padding: 5px;
+  
+}
+.tabs:hover{
+  cursor: pointer;
+}
+
+.tabsGroup{
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+}
+
+.seasonalSwitchBtn{
+  border-radius: 20px;
+  padding: 5px;
+  border: 0px;
+  transition: 0.1s linear;
+}
+
+.seasonalSwitchBtn:hover{
+  cursor: pointer;
 }

@@ -37,7 +37,7 @@ function App() {
           )}
         </aside>
         <header className="header">
-          <SeasonalSwitcher onThemeChange={setTheme} />
+          <SeasonalSwitcher onThemeChange={setTheme}/>
         </header>
         <main className="main">
           <div className="input-box">

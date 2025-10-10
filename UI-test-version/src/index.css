@@ -33,9 +33,9 @@ body,
   width: 200px;
   align-items: flex-start;
   height: 100%;
-  border: 5px solid #2b2d2b;
   border-radius: 10px;
   margin-right: 10px;
+  background-color: #2b2d2b;
 }
 
 .menu-btn {
@@ -131,36 +131,34 @@ textarea {
   padding: 5px;
 }
 
-.seasonalSwithConteinter{
+.seasonalSwithConteinter {
   display: flex;
   align-items: center;
-  
 }
 
-.tabs{
+.tabs {
   margin: 10px;
   border-radius: 20px;
   border: 0px;
   padding: 5px;
-  
 }
-.tabs:hover{
+.tabs:hover {
   cursor: pointer;
 }
 
-.tabsGroup{
+.tabsGroup {
   display: flex;
   align-items: center;
   margin-left: 10px;
 }
 
-.seasonalSwitchBtn{
+.seasonalSwitchBtn {
   border-radius: 20px;
   padding: 5px;
   border: 0px;
   transition: 0.1s linear;
 }
 
-.seasonalSwitchBtn:hover{
+.seasonalSwitchBtn:hover {
   cursor: pointer;
 }

@@ -70,25 +70,52 @@ function App() {
 
       {/* МОДАЛКА */}
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-        <h2 className="text-xl font-semibold mb-4">Создать новый чат</h2>
+  <h2
+    style={{
+      fontSize: '1.25rem',
+      fontWeight: '600',
+      marginBottom: '1rem',
+    }}
+  >
+    Создать новый чат
+  </h2>
 
-        <div className="space-y-3">
-          <input
-            type="text"
-            placeholder="Название чата"
-            value={chatName}
-            onChange={(e) => setChatName(e.target.value)}
-            className="w-full border p-2 rounded-lg"
-          />
+  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+    <input
+      type="text"
+      placeholder="Название чата"
+      value={chatName}
+      onChange={(e) => setChatName(e.target.value)}
+      style={{
+        width: '100%',
+        border: '1px solid #ccc',
+        padding: '0.5rem 0.75rem',
+        borderRadius: '8px',
+        fontSize: '1rem',
+      }}
+    />
 
-          <button
-            onClick={handleCreateChat}
-            className="bg-green-600 text-white px-4 py-2 rounded-lg w-full hover:bg-green-700 transition"
-          >
-            Создать
-          </button>
-        </div>
-      </Modal>
+    <button
+      onClick={handleCreateChat}
+      style={{
+        backgroundColor: '#16a34a',
+        color: '#fff',
+        padding: '0.5rem 1rem',
+        borderRadius: '8px',
+        width: '100%',
+        border: 'none',
+        fontSize: '1rem',
+        cursor: 'pointer',
+        transition: 'background-color 0.2s',
+      }}
+      onMouseOver={(e) => (e.currentTarget.style.backgroundColor = '#15803d')}
+      onMouseOut={(e) => (e.currentTarget.style.backgroundColor = '#16a34a')}
+    >
+      Создать
+    </button>
+  </div>
+</Modal>
+
     </>
   );
 }

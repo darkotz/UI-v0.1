@@ -34,7 +34,6 @@ body,
   align-items: flex-start;
   height: 100%;
   border: 5px solid #2b2d2b;
-  border-radius: 10px;
   margin-right: 10px;
   background-color: #2b2d2b;
 }
@@ -74,6 +73,7 @@ body,
   font-size: 50px;
   display: flex;
   align-items: center;
+  justify-content: flex-end;
 }
 
 .main {
@@ -164,4 +164,15 @@ border-radius: 5px;
 
 .seasonalSwitchBtn:hover{
   cursor: pointer;
+}
+
+.newChatBtn {
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #434343ff;
+  color: rgb(199, 199, 199);
+  border: 0px;
+  box-shadow: 1px 1px 2px white;
+  position: relative;
+  top: 330px;
 }

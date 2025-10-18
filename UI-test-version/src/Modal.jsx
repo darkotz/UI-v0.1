@@ -1,13 +1,13 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 
 const Modal = ({ isOpen, onClose, children }) => {
   const modalRef = useRef();
   const overlayRef = useRef();
+  
 
-  useRef(() => {
+  useEffect(() => {
     if (isOpen) {
-      // показываем модалку с анимацией
       gsap.fromTo(
         overlayRef.current,
         { opacity: 0 },
@@ -19,7 +19,6 @@ const Modal = ({ isOpen, onClose, children }) => {
         { scale: 1, opacity: 1, y: 0, duration: 0.4, ease: "back.out(1.7)" }
       );
     } else {
-      // при закрытии плавно скрываем
       gsap.to(modalRef.current, {
         scale: 0.8,
         opacity: 0,
@@ -40,15 +39,43 @@ const Modal = ({ isOpen, onClose, children }) => {
   return (
     <div
       ref={overlayRef}
-      className="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
+      style={{
+        position: "fixed",     // ✅ поверх всего
+        top: 0,
+        left: 0,
+        width: "100vw",
+        height: "100vh",
+        backgroundColor: "rgba(0, 0, 0, 0.5)",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        zIndex: 9999,          // ✅ гарантирует, что будет над всем
+      }}
     >
       <div
         ref={modalRef}
-        className="bg-white rounded-2xl shadow-lg p-6 w-full max-w-md relative"
+        style={{
+          backgroundColor: "#fff",
+          borderRadius: "16px",
+          boxShadow: "0 8px 24px rgba(0, 0, 0, 0.25)",
+          padding: "24px",
+          width: "90%",
+          maxWidth: "480px",
+          position: "relative",
+        }}
       >
         <button
           onClick={onClose}
-          className="absolute top-3 right-3 text-gray-500 hover:text-black"
+          style={{
+            position: "absolute",
+            top: "12px",
+            right: "12px",
+            color: "#555",
+            background: "none",
+            border: "none",
+            fontSize: "1.25rem",
+            cursor: "pointer",
+          }}
         >
           ✖
         </button>

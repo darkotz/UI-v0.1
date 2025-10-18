@@ -12,7 +12,7 @@ export default function SeasonalSwitcher({ onThemeChange }) {
   const themeKeys = Object.keys(themes).filter((t) => t !== active);
 
   useEffect(() => {
-    const radius = 0;
+    const radius = 30;
     const angleStep = (2 * Math.PI) / themeKeys.length;
 
     if (open) {
@@ -53,7 +53,7 @@ export default function SeasonalSwitcher({ onThemeChange }) {
   return (
     <div
       className="seasonalSwithConteinter"
-      style={{ width: "4rem", height: "4rem" }}
+      style={{ width: "4rem", height: "4rem"}}
       onMouseEnter={() => setOpen(true)}
       onMouseLeave={() => setOpen(false)}
     >

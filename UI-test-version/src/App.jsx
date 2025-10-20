@@ -1,9 +1,11 @@
 import React, { useState, useRef, useEffect } from "react";
+import { fetchChats, createChat, removeChat } from "./api";
 import "./index.css";
 import { gsap } from "gsap";
 import { themes } from "./themes";
 import SeasonalSwitcher from "./SeasonalSwitcher";
 import Modal from "./Modal";
+const [chats, setChats] = useState([]);
 
 function App() {
   const [open, setOpen] = useState(false);
@@ -46,20 +48,59 @@ const handleInputChange = (e) => {
     });
   }, [theme]);
 
-  const handleCreateChat = () => {
-    if (chatName.trim() === "" ) return;
-
-    setChats((prev) => [...prev, chatName.trim()]);
-
-    console.log("New chat is:", {chatName, theme});
-
-    setIsModalOpen(false);
-    setChatName("");
-  };
-
-  const handleDeleteChat = (indexToDelete) => {
-    setChats((prev) => prev.filter((_, index) => index !== indexToDelete))
+  useEffect(() => {
+  let mounted = true;
+  async function load() {
+    try {
+      const data = await fetchChats();
+      if (!mounted) return;
+      const normalized = data.map((item, idx) =>
+        typeof item === "string" ? { id: idx + 1, name: item } : item
+      );
+      setChats(normalized);
+    } catch (err) {
+      console.error("Ошибка загрузки чатов:", err);
+    }
   }
+  load();
+  return () => { mounted = false; };
+}, []);
+
+ const handleCreateChat = async () => {
+  if (chatName.trim() === "") return;
+
+  try {
+    const created = await createChat(chatName.trim());
+    // Если backend возвращает объект { id, name } — добавим его,
+    // если возвращает просто имя — добавляем нормализованный объект
+    const chatObj = created && created.id ? created : { id: Date.now(), name: created.name || chatName.trim() };
+    setChats(prev => [...prev, chatObj]);
+  } catch (err) {
+    console.error("Ошибка при создании чата:", err);
+  }
+
+  setIsModalOpen(false);
+  setChatName("");
+};
+
+const handleDeleteChat = async (indexToDelete) => {
+  const chatToDelete = chats[indexToDelete];
+  if (!chatToDelete) return;
+
+  // если у объекта есть id — используем его, иначе — индекс
+  const id = chatToDelete.id;
+  try {
+    if (id !== undefined) {
+      await removeChat(id);
+    } else {
+      // если бэкенд не поддерживает id — можно отправить имя (вариант fallback)
+      await removeChat(chatToDelete.name);
+    }
+    setChats(prev => prev.filter((_, i) => i !== indexToDelete));
+  } catch (err) {
+    console.error("Ошибка при удалении чата:", err);
+  }
+};
 
   return (
     <>
@@ -87,7 +128,7 @@ const handleInputChange = (e) => {
       borderRadius: "8px",
     }}
   >
-    <span>{chat}</span>
+    <span>{chat.name || chat}</span>
     <button
       onClick={(e) => {
         e.stopPropagation(); 
